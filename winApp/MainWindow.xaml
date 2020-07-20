@@ -1,0 +1,41 @@
+﻿<Window x:Class="winApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:winApp"
+        mc:Ignorable="d"
+        Title="winApp v0.01" Height="450" Width="450" Loaded="Window_Loaded" Closed="Window_Closed">
+    <Grid>
+        <TextBox x:Name="dataFiled" HorizontalAlignment="Left" Height="23" 
+             Margin="145,82,0,0" TextWrapping="Wrap" Text="Data" 
+             VerticalAlignment="Top" Width="120" Visibility="Collapsed"/>
+        <TextBox x:Name="numberField" HorizontalAlignment="Left" Height="23"
+             Margin="145,110,0,0" TextWrapping="Wrap" Text="Number"
+             VerticalAlignment="Top" Width="120" Visibility="Collapsed"/>
+        <TextBox x:Name="costField" HorizontalAlignment="Left" Height="23"
+             Margin="10,244,0,0" TextWrapping="Wrap" Text="Сумма"
+             VerticalAlignment="Top" Width="130"/>
+        <ListBox x:Name="categoryList" HorizontalAlignment="Left" Height="106" 
+             Margin="10,10,0,0" VerticalAlignment="Top" Width="130" SelectionChanged="categoryList_SelectionChanged"/>
+        <ListBox x:Name="subCategoryList" HorizontalAlignment="Left" Height="118"
+             Margin="10,121,0,0" VerticalAlignment="Top" Width="130" SelectionChanged="subCategoryList_SelectionChanged"/>
+
+        <TextBox x:Name="clientITC" HorizontalAlignment="Left" Height="23" 
+      Margin="145,14,0,0" TextWrapping="Wrap" Text="ITX" 
+      VerticalAlignment="Top" Width="120" Visibility="Collapsed"/>
+        <TextBox x:Name="clientRC" HorizontalAlignment="Left" Height="23"
+      Margin="145,42,0,0" TextWrapping="Wrap" Text="RC"
+      VerticalAlignment="Top" Width="120" Visibility="Collapsed"/>
+        <TextBox x:Name="supITX" HorizontalAlignment="Left" Height="23" 
+      Margin="270,14,0,0" TextWrapping="Wrap" Text="ITX" 
+      VerticalAlignment="Top" Width="120" Visibility="Collapsed"/>
+        <TextBox x:Name="supRC" HorizontalAlignment="Left" Height="23"
+      Margin="270,42,0,0" TextWrapping="Wrap" Text="RC"
+      VerticalAlignment="Top" Width="120" Visibility="Collapsed"/>
+        <Button x:Name="calculateButton" Content="Расчитать" HorizontalAlignment="Left" 
+      Margin="10,272,0,0" VerticalAlignment="Top" Width="130" Click="calculateButton_Click" Height="30"/>
+
+
+    </Grid>
+</Window>

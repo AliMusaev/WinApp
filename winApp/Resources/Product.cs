@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace winApp.Resources
+{
+    class Product
+    {
+        public string name;
+        public string type;
+        public double minPrice;
+        public double maxPrice;
+        public bool isAct;
+    }
+}
