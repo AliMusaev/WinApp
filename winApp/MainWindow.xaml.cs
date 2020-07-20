@@ -26,12 +26,16 @@ namespace winApp
         Categories excelLoadFile;
         SubCategories subCategories;
         Calculate calculate;
+        DocumentInfo documentInfo;
+        
         public MainWindow()
         {
             InitializeComponent();
             subCategories = new SubCategories();
             excelLoadFile = new Categories();
             calculate = new Calculate();
+            documentInfo = new DocumentInfo();
+            currencyName.ItemsSource = documentInfo.CurrencyNameAndCode.Keys;
         }
 
 
@@ -61,7 +65,6 @@ namespace winApp
             }
         }
 
-
         // Load general categories from excel file 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -73,6 +76,29 @@ namespace winApp
         {
             excelLoadFile.Close();
         }
-        
+
+        private void GetDocInfo()
+        {
+            documentInfo.VendorName = vendorName.Text;
+            documentInfo.VendorAdress = vendorAdress.Text;
+            documentInfo.VendorITN = Convert.ToInt16(vendorITN.Text);
+            documentInfo.VendorRRC = Convert.ToInt16(vendorRRC.Text);
+            documentInfo.ShipperNameAndAdress = shipperNameAndAdress.Text;
+            documentInfo.ConsigneeNameAndAdress = consigneeNameAndAdress.Text;
+            documentInfo.DocNumber = docNumber.Text;
+            documentInfo.DocData = docData.Text;
+            documentInfo.CustomerName = customerName.Text;
+            documentInfo.CustomerAdress = customerAdress.Text;
+            documentInfo.CustomerITN = Convert.ToInt16(customerITN.Text);
+            documentInfo.CustomerRRC = Convert.ToInt16(customerRRC.Text);
+            documentInfo.CurrencyName = currencyName.Text;
+            documentInfo.CurrencyCode = Convert.ToInt16(currencyCode.Text);
+            documentInfo.GovermentID = govermentId.Text;
+        }
+
+        private void currencyName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            currencyCode.Text = (documentInfo.CurrencyNameAndCode[currencyName.SelectedItem.ToString()]).ToString();
+        }
     }
 }

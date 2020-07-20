@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:winApp"
         mc:Ignorable="d"
-        Title="winApp v0.01" Height="450" Width="450" Loaded="Window_Loaded" Closed="Window_Closed">
+        Title="winApp v0.01" Loaded="Window_Loaded" Closed="Window_Closed">
     <Grid>
         <TextBox x:Name="dataFiled" HorizontalAlignment="Left" Height="23" 
              Margin="145,82,0,0" TextWrapping="Wrap" Text="Data" 
@@ -21,20 +21,87 @@
         <ListBox x:Name="subCategoryList" HorizontalAlignment="Left" Height="118"
              Margin="10,121,0,0" VerticalAlignment="Top" Width="130" SelectionChanged="subCategoryList_SelectionChanged"/>
 
-        <TextBox x:Name="clientITC" HorizontalAlignment="Left" Height="23" 
-      Margin="145,14,0,0" TextWrapping="Wrap" Text="ITX" 
-      VerticalAlignment="Top" Width="120" Visibility="Collapsed"/>
-        <TextBox x:Name="clientRC" HorizontalAlignment="Left" Height="23"
-      Margin="145,42,0,0" TextWrapping="Wrap" Text="RC"
-      VerticalAlignment="Top" Width="120" Visibility="Collapsed"/>
-        <TextBox x:Name="supITX" HorizontalAlignment="Left" Height="23" 
-      Margin="270,14,0,0" TextWrapping="Wrap" Text="ITX" 
-      VerticalAlignment="Top" Width="120" Visibility="Collapsed"/>
-        <TextBox x:Name="supRC" HorizontalAlignment="Left" Height="23"
-      Margin="270,42,0,0" TextWrapping="Wrap" Text="RC"
-      VerticalAlignment="Top" Width="120" Visibility="Collapsed"/>
         <Button x:Name="calculateButton" Content="Расчитать" HorizontalAlignment="Left" 
       Margin="10,272,0,0" VerticalAlignment="Top" Width="130" Click="calculateButton_Click" Height="30"/>
+        <Grid Margin="150,5,5,5" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="260"></ColumnDefinition>
+                <ColumnDefinition Width="*">
+                </ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Content="Продавец" Grid.Row="0" Grid.Column="0" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBox x:Name="vendorName" TextWrapping="Wrap" TextAlignment="Left" VerticalContentAlignment="Center"  Grid.Row="0" Grid.Column="1"/>
+            
+            <Label Content="Адрес" Grid.Row="1" Grid.Column="0" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBox x:Name="vendorAdress" TextWrapping="Wrap" TextAlignment="Left" VerticalContentAlignment="Center"  Grid.Row="1" Grid.Column="1"/>
+            
+            <Label Content="ИНН\КПП продавца" Grid.Row="2" Grid.Column="0" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+            <Grid Grid.Row="2" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="vendorITN" TextWrapping="Wrap" TextAlignment="Left" VerticalContentAlignment="Center" Grid.Column="0"/>
+                <TextBox x:Name="vendorRRC" TextWrapping="Wrap" TextAlignment="Left" VerticalContentAlignment="Center" Grid.Column="1"/>
+            </Grid>
+            <Label Content="Грузоотправитель и его адрес" Grid.Row="3" Grid.Column="0" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBox x:Name="shipperNameAndAdress" TextWrapping="Wrap" TextAlignment="Left" VerticalContentAlignment="Center"  Grid.Row="3" Grid.Column="1"/>
+
+            <Label Content="Грузополучатель и его адрес" Grid.Row="4" Grid.Column="0" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBox x:Name="consigneeNameAndAdress" TextWrapping="Wrap" TextAlignment="Left" VerticalContentAlignment="Center"  Grid.Row="4" Grid.Column="1"/>
+
+            <Label Content="К платежно-расчетному документу №" Grid.Row="5" Grid.Column="0" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+            <Grid Grid.Row="5" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="25"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="docNumber" TextWrapping="Wrap" TextAlignment="Left" VerticalContentAlignment="Center" Grid.Column="0"/>
+                <Label Content="от" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBox x:Name="docData" TextWrapping="Wrap" TextAlignment="Left" VerticalContentAlignment="Center" Grid.Column="2"/>
+            </Grid>
+            <Label Content="Покупатель" Grid.Row="6" Grid.Column="0" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBox x:Name="customerName" TextWrapping="Wrap" TextAlignment="Left" VerticalContentAlignment="Center"  Grid.Row="6" Grid.Column="1"/>
+            <Label Content="Адрес" Grid.Row="7" Grid.Column="0" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBox x:Name="customerAdress" TextWrapping="Wrap" TextAlignment="Left" VerticalContentAlignment="Center"  Grid.Row="7" Grid.Column="1"/>
+            <Label Content="ИНН\КПП покупателя" Grid.Row="8" Grid.Column="0" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+            <Grid Grid.Row="8" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="customerITN" TextWrapping="Wrap" TextAlignment="Left" VerticalContentAlignment="Center" Grid.Column="0"/>
+                <TextBox x:Name="customerRRC" TextWrapping="Wrap" TextAlignment="Left" VerticalContentAlignment="Center" Grid.Column="1"/>
+            </Grid>
+            <Label Content="Валюта: наименование, код" Grid.Row="9" Grid.Column="0" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+            <Grid Grid.Row="9" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <ComboBox  x:Name="currencyName"  Grid.Column= "0" SelectionChanged="currencyName_SelectionChanged"/>
+                <TextBox x:Name="currencyCode" TextWrapping="Wrap" TextAlignment="Left" VerticalContentAlignment="Center" Grid.Column="1"/>
+            </Grid>
+            <Label Content="Идентификатор государственного контракта," Grid.Row="10" Grid.Column="0" VerticalContentAlignment="Bottom" HorizontalAlignment="Left"/>
+            <Label Content="договора (соглашения) (при наличии)" Grid.Row="11" Grid.Column="0" VerticalContentAlignment="Top" HorizontalAlignment="Left"/>
+            <TextBox x:Name="govermentId" TextWrapping="Wrap" TextAlignment="Left" VerticalContentAlignment="Center"  Grid.Row="10" Grid.Column="1"/>
+
+        </Grid>
 
 
     </Grid>

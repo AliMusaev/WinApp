@@ -57,9 +57,11 @@
     </ApplicationDefinition>
     <Compile Include="Resources\Calculate.cs" />
     <Compile Include="Resources\Categories.cs" />
+    <Compile Include="Resources\DocumentInfo.cs" />
     <Compile Include="Resources\Output.cs" />
     <Compile Include="Resources\SubCategories.cs" />
     <Compile Include="Resources\Product.cs" />
+    <Compile Include="Resources\ViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
