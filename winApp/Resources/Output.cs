@@ -48,28 +48,28 @@ namespace winApp.Resources
             k++;
             sheet.Cells[k + 1, "DH"] = cost;
         }
-        public void LoadCalculatedData(List<List<int>> results, List<Product> products, List<double> calculatedPrices, double cost)
+        public void LoadCalculatedData(int[] results, List<Product> products, List<double> calculatedPrices, double cost)
         {
-            Random rand = new Random();
-            int z = rand.Next(0, results.Count - 1);
             // first row number 
             int k = 25;
             for (int i = 0; i < products.Count; i++)
             {
-                if (results[z][i] * calculatedPrices[i] < cost)
+                if (results[i] * calculatedPrices[i] < cost)
                 {
-                    if (results[z][i] > 0)
+                    if (results[i] > 0)
                     {
 
                         InsertRow(k, sheet);
                         sheet.Cells[k, "A"] = products[i].name;
                         char[] arr = products[i].name.ToCharArray();
-                        int y = arr.Length / 18;
+                        int y = 1;
+                        if (arr.Length > 18)
+                            y = arr.Length / 18;
                         sheet.Rows[k].RowHeight = 24 * y;
                         sheet.Cells[k, "AI"] = products[i].type;
-                        sheet.Cells[k, "DH"] = (results[z][i]) * calculatedPrices[i];
+                        sheet.Cells[k, "DH"] = (results[i]) * calculatedPrices[i];
                         sheet.Cells[k, "BB"] = calculatedPrices[i];
-                        sheet.Cells[k, "AT"] = results[z][i];
+                        sheet.Cells[k, "AT"] = results[i];
                         k++;
 
                     }

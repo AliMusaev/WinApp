@@ -25,7 +25,7 @@ namespace winApp
     {
         Categories excelLoadFile;
         SubCategories subCategories;
-        Calculate calculate;
+        
         
         
         public MainWindow()
@@ -33,7 +33,7 @@ namespace winApp
             InitializeComponent();
             subCategories = new SubCategories();
             excelLoadFile = new Categories();
-            calculate = new Calculate();
+            
             currencyName.ItemsSource = DocumentInfo.CurrencyNameAndCode.Keys;
         }
 
@@ -60,6 +60,7 @@ namespace winApp
             {
                 if (item.Key == subCategoryList.SelectedItem.ToString())
                 {
+                    Calculate calculate = new Calculate();
                     calculate.SubName = item.Key;
                     calculate.StartCalculating(item.Value, Math.Round((Convert.ToDouble(costField.Text)),2));
                 }
