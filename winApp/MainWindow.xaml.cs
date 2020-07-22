@@ -26,7 +26,7 @@ namespace winApp
         Categories excelLoadFile;
         SubCategories subCategories;
         Calculate calculate;
-        DocumentInfo documentInfo;
+        
         
         public MainWindow()
         {
@@ -34,8 +34,7 @@ namespace winApp
             subCategories = new SubCategories();
             excelLoadFile = new Categories();
             calculate = new Calculate();
-            documentInfo = new DocumentInfo();
-            currencyName.ItemsSource = documentInfo.CurrencyNameAndCode.Keys;
+            currencyName.ItemsSource = DocumentInfo.CurrencyNameAndCode.Keys;
         }
 
 
@@ -55,6 +54,8 @@ namespace winApp
         }
         private void calculateButton_Click(object sender, RoutedEventArgs e)
         {
+            // Считывание данных с полей
+            GetDocInfo();
             foreach (var item in subCategories.Data)
             {
                 if (item.Key == subCategoryList.SelectedItem.ToString())
@@ -74,31 +75,42 @@ namespace winApp
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            excelLoadFile.Close();
+            //excelLoadFile.Close();
         }
 
         private void GetDocInfo()
         {
-            documentInfo.VendorName = vendorName.Text;
-            documentInfo.VendorAdress = vendorAdress.Text;
-            documentInfo.VendorITN = Convert.ToInt16(vendorITN.Text);
-            documentInfo.VendorRRC = Convert.ToInt16(vendorRRC.Text);
-            documentInfo.ShipperNameAndAdress = shipperNameAndAdress.Text;
-            documentInfo.ConsigneeNameAndAdress = consigneeNameAndAdress.Text;
-            documentInfo.DocNumber = docNumber.Text;
-            documentInfo.DocData = docData.Text;
-            documentInfo.CustomerName = customerName.Text;
-            documentInfo.CustomerAdress = customerAdress.Text;
-            documentInfo.CustomerITN = Convert.ToInt16(customerITN.Text);
-            documentInfo.CustomerRRC = Convert.ToInt16(customerRRC.Text);
-            documentInfo.CurrencyName = currencyName.Text;
-            documentInfo.CurrencyCode = Convert.ToInt16(currencyCode.Text);
-            documentInfo.GovermentID = govermentId.Text;
+            DocumentInfo.ChekID = checkID.Text;
+            DocumentInfo.ChekData = checkData.Text;
+            DocumentInfo.ChangeID = changeID.Text;
+            DocumentInfo.ChangeData = changeData.Text;
+            DocumentInfo.VendorName = vendorName.Text;
+            DocumentInfo.VendorAdress = vendorAdress.Text;
+            DocumentInfo.VendorITN = vendorITN.Text;
+            DocumentInfo.VendorRRC = vendorRRC.Text;
+            DocumentInfo.ShipperNameAndAdress = shipperNameAndAdress.Text;
+            DocumentInfo.ConsigneeNameAndAdress = consigneeNameAndAdress.Text;
+            DocumentInfo.DocNumber = docNumber.Text;
+            DocumentInfo.DocData = docData.Text;
+            DocumentInfo.CustomerName = customerName.Text;
+            DocumentInfo.CustomerAdress = customerAdress.Text;
+            DocumentInfo.CustomerITN = customerITN.Text;
+            DocumentInfo.CustomerRRC = customerRRC.Text;
+            DocumentInfo.CurrencyName = currencyName.Text;
+            DocumentInfo.CurrencyCode = currencyCode.Text;
+            DocumentInfo.GovermentID = govermentId.Text;
         }
 
         private void currencyName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            currencyCode.Text = (documentInfo.CurrencyNameAndCode[currencyName.SelectedItem.ToString()]).ToString();
+            currencyCode.Text = (DocumentInfo.CurrencyNameAndCode[currencyName.SelectedItem.ToString()]).ToString();
+        }
+
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            excelLoadFile.Close();
+
         }
     }
 }

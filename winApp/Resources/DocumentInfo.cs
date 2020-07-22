@@ -8,21 +8,25 @@ namespace winApp.Resources
 {
     public class DocumentInfo
     {
-        public Dictionary<string, int> CurrencyNameAndCode = new Dictionary<string, int>() { { "Российский рубль", 643 }, { "Евро", 978 }, { "Доллар США", 840 } };
-        public string VendorName;
-        public string VendorAdress;
-        public int VendorITN;
-        public int VendorRRC;
-        public string ShipperNameAndAdress;
-        public string ConsigneeNameAndAdress;
-        public string DocNumber;
-        public string DocData;
-        public string CustomerName;
-        public string CustomerAdress;
-        public int CustomerITN;
-        public int CustomerRRC;
-        public string CurrencyName;
-        public int CurrencyCode;
-        public string GovermentID;
+        public static string ChekID;
+        public static string ChekData;
+        public static string ChangeID;
+        public static string ChangeData;
+        public static Dictionary<string, int> CurrencyNameAndCode = new Dictionary<string, int>() { { "Российский рубль", 643 }, { "Евро", 978 }, { "Доллар США", 840 } };
+        public static string VendorName;
+        public static string VendorAdress;
+        public static string VendorITN;
+        public static string VendorRRC;
+        public static string ShipperNameAndAdress;
+        public static string ConsigneeNameAndAdress;
+        public static string DocNumber;
+        public static string DocData;
+        public static string CustomerName;
+        public static string CustomerAdress;
+        public static string CustomerITN;
+        public static string CustomerRRC;
+        public static string CurrencyName;
+        public static string CurrencyCode;
+        public static string GovermentID;
     }
 }

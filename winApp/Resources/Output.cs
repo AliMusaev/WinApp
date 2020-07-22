@@ -31,6 +31,7 @@ namespace winApp.Resources
 
             sheet = (Excel.Worksheet)Book.Sheets[1];
             var lastCell = sheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);
+            EnterFelds();
         }
         public void LoadCalculatedData(List<Product> products, double cost)
         {
@@ -84,6 +85,25 @@ namespace winApp.Resources
             Book.Close(false);
             excelApp.Quit();
             System.Windows.MessageBox.Show("Complete", "Done", MessageBoxButton.OK);
+        }
+        void EnterFelds()
+        {
+            sheet.Cells[7, "AF"] = DocumentInfo.ChekID;
+            sheet.Cells[7, "BF"] = DocumentInfo.ChekData;
+            sheet.Cells[8, "AF"] = DocumentInfo.ChangeID;
+            sheet.Cells[8, "BF"] = DocumentInfo.ChangeData;
+            sheet.Cells[10,"M"] = DocumentInfo.VendorName;
+            sheet.Cells[11, "I"] = DocumentInfo.VendorAdress;
+            sheet.Cells[12, "Y"] = DocumentInfo.VendorITN + "/" + DocumentInfo.VendorRRC;
+            sheet.Cells[13, "AI"] = DocumentInfo.ShipperNameAndAdress;
+            sheet.Cells[14, "AH"] = DocumentInfo.ConsigneeNameAndAdress;
+            sheet.Cells[15, "AR"] = DocumentInfo.DocNumber;
+            sheet.Cells[15, "BO"] = DocumentInfo.DocData;
+            sheet.Cells[16, "O"] = DocumentInfo.CustomerName;
+            sheet.Cells[17, "I"] = DocumentInfo.CustomerAdress;
+            sheet.Cells[18, "AA"] = DocumentInfo.CustomerITN + "/" + DocumentInfo.CustomerRRC;
+            sheet.Cells[19, "AG"] = DocumentInfo.CurrencyName + ", " + DocumentInfo.CurrencyCode;
+            sheet.Cells[20, "CP"] = DocumentInfo.GovermentID;
         }
         void InsertRow(int rowNum, Excel.Worksheet sheet)
         {

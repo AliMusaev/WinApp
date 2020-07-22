@@ -19,21 +19,27 @@ namespace winApp.Resources
         List<int> multiplyCounter;
         List<List<int>> results = new List<List<int>>();
         double summ;
-        bool mult = false;
+        int mult;
+        double cost;
+        Random range;
 
-        
+
         public Calculate()
         {
             priceLists = new List<List<double>>();
             calculatedPrices = new List<double>();
             multiplyCounter = new List<int>();
+            range = new Random();
         }
-        public void StartCalculating(List<Product> products, double cost)
+        public void StartCalculating(List<Product> products, double cost1)
         {
+            
+            this.cost = cost1;
             if(products.Count == 1)
             {
                 Output outPut = new Output();
                 outPut.LoadCalculatedData(products, cost);
+                
                 outPut.OutputExit();
             }
             else
@@ -43,7 +49,7 @@ namespace winApp.Resources
                 {
                     results.Clear();
                     CalculatePrice(products, cost);
-                    BulkheadLists(cost, 0);
+                    BulkheadLists( 0);
                     if (results.Count > 0)
                     {
                         find = true;
@@ -58,59 +64,57 @@ namespace winApp.Resources
         
 
 
-        void BulkheadLists(double cost, int i)
+        void BulkheadLists(int i)
         {
-            Random range = new Random();
-            if (priceLists[i].Count > multiplyCounter[i])
+           if (priceLists[i].Count > multiplyCounter[i])
             {
                 for (int k = priceLists[i].Count; k > 0 ; k--)
                 {
                     SummCalculating();
-                    if ((cost - summ) > 20000)
-                    {
-                        mult = true;
-                    }
                     if (summ == cost)
                     {
                         List<int> blab = new List<int>(multiplyCounter);
                         results.Add(blab);
                         break;
                     }
-                    if (summ > cost)
+                    else if (summ > cost)
                     {
                         break;
                     }
-
                     if (calculatedPrices[i] < cost)
                     {
+                        bool chek = false;
+                        while (!chek)
+                        {
+                            if (priceLists[i].Count > 19)
+                                mult = range.Next(1, priceLists[i].Count / 20) * range.Next(1, priceLists[i].Count / 20);
+                            else
+                                mult = 1;
 
-                        if (mult && multiplyCounter[i] + 71 < priceLists[i].Count)
-                            multiplyCounter[i] += 70;
-                        else if (mult && multiplyCounter[i] + 61 < priceLists[i].Count)
-                            multiplyCounter[i] += 60;
-                        else if (mult && multiplyCounter[i] + 51 < priceLists[i].Count)
-                            multiplyCounter[i] += 50;
-                        else if (mult && multiplyCounter[i] + 31 < priceLists[i].Count)
-                            multiplyCounter[i] += 30;
-                        else if (mult && multiplyCounter[i] + 21 < priceLists[i].Count)
-                            multiplyCounter[i] += 20;
-                        else if (mult && multiplyCounter[i] + 11 < priceLists[i].Count)
-                            multiplyCounter[i] += 10;
-                        else if (multiplyCounter[i] + 1 < priceLists[i].Count)
-                            multiplyCounter[i]++;
+                            if (multiplyCounter[i] + mult < priceLists[i].Count)
+                            {
+                                multiplyCounter[i] += mult;
+                                chek = true;
+                            }
+                            else if (multiplyCounter[i] + 1 < priceLists[i].Count)
+                            {
+                                multiplyCounter[i] += 1;
+                                chek = true;
+                            }
+                            else
+                                chek = true;
+                        }
                     }
-                    mult = false;
                     if (i+1 < multiplyCounter.Count)
                     {
-                        BulkheadLists(cost, i + 1);
+                        BulkheadLists(i + 1);
                     }
-                    
                 }
                 multiplyCounter[i] = 0;
             }
             else
             {
-                BulkheadLists(cost, i + 1);
+                BulkheadLists(i + 1);
             }
         }
 
@@ -129,7 +133,7 @@ namespace winApp.Resources
             {
                 if (priceLists[i].Count > multiplyCounter[i])
                 {
-                    summ += Math.Round(priceLists[i][multiplyCounter[i]], 2);
+                    summ += Math.Round((priceLists[i][multiplyCounter[i]]), 2);
                 }
             }
         }
