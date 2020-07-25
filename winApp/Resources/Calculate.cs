@@ -14,107 +14,64 @@ namespace winApp.Resources
     {
         string subName;
         public string SubName { get => subName; set => subName = value; }
-        List<int> calculatedPrices;
-        List<int[]> priceLists;
-        int [] results;
-        double summ;
+        int [] calculatedPrices;
+        int[] calculatedAmount;
+        double [] results;
         int cost;
-        bool find = false;
-        int mult = 1;
+        double cost1;
         int[] distributedValues;
-        List<Product> prod;
-        public Calculate()
+        List<Product> products;
+        public Calculate(List<Product> input)
         {
-            priceLists = new List<int[]>();
-            calculatedPrices = new List<int>();
+            products = input;
+            calculatedPrices = new int[products.Count];
+            calculatedAmount = new int[products.Count];
+            distributedValues = new int[products.Count];
         }
         public void StartCalculating(List<Product> products, double cost1)
         {
-            
             this.cost = (int)(cost1 * 100);
             if (products.Count == 1)
             {
                 Output outPut = new Output();
-                outPut.LoadCalculatedData(products, cost);
+                outPut.LoadCalculatedData(products, cost/100);
                 outPut.OutputExit();
             }
             else
             {
-                prod = products;
-                PercentageDistribution();
-                ValueFind();
-
-                //Output outPut = new Output();
-                //outPut.LoadCalculatedData(results, products, cost);
-                //outPut.OutputExit();
+                if (FindDivisors())
+                {
+                    CalculateResult();
+                    Output outPut = new Output();
+                    outPut.LoadCalculatedData(calculatedAmount, products, results, cost1);
+                    outPut.OutputExit();
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("Совпадений не обнаружено", "Error", MessageBoxButton.OK);
+                }
+                
+               
             }
 
         }
         
 
 
-        //void BulkheadLists(int i, double cost, int[] multiplyCounter)
-        //{
-        //    cost = Math.Round(cost, 2);
-        //   if (priceLists[i].Length > multiplyCounter[i])
-        //    {
-        //        for (int k = priceLists[i].Length; k > 0 ; k--)
-        //        {
-        //            SummCalculating(multiplyCounter);
-        //            if (summ == cost && !find)
-        //            {
-        //                for (int j = 0; j < results.Length; j++)
-        //                {
-        //                    results[j] += multiplyCounter[j];
-                            
-        //                }
-        //                find = true;
-        //                return;
-        //            }
-        //            else if(find)
-        //            {
-        //                return;
-        //            }
-        //            if (summ > cost)
-        //            {
-        //                break;
-        //            }
-        //            if (calculatedPrices[i] < cost)
-        //            {
-
-        //                    if (multiplyCounter[i] + mult < priceLists[i].Length)
-        //                    {
-        //                        multiplyCounter[i] += mult;
-        //                    }
-        //            }
-        //            if (i+1 < multiplyCounter.Length)
-        //            {
-        //                BulkheadLists(i + 1, cost, multiplyCounter);
-        //            }
-        //        }
-        //        multiplyCounter[i] = 0;
-        //    }
-        //    else
-        //    {
-        //        BulkheadLists(i + 1, cost, multiplyCounter);
-        //    }
-        //}
+        
 
 
 
 
         void PercentageDistribution()
         {
-            
                 int percent = 10000;
                 int tempCost = cost;
-                CalculatePrice(prod);
-                distributedValues = new int[calculatedPrices.Count];
-                for (int i = 0; i < calculatedPrices.Count; i++)
+                for (int i = 0; i < calculatedPrices.Length; i++)
                 {
                     if (percent > 0 && tempCost > 0)
                     {
-                        if (i + 1 == calculatedPrices.Count)
+                        if (i + 1 == calculatedPrices.Length)
                         {
                             distributedValues[i] = tempCost;
                             break;
@@ -132,49 +89,51 @@ namespace winApp.Resources
                         break;
                     }
                 }
-        }
-            
-
-        private void ValueFind()
+        }        
+        bool FindDivisors()
         {
+            int counter = 0;
             int k = 0;
-            results = new int[calculatedPrices.Count];
-            while (k < calculatedPrices.Count)
+            
+            while(k < calculatedPrices.Length)
             {
-
-                if (distributedValues[k] > 0)
+                calculatedPrices[k] = CalculatePrice(products, k, distributedValues[k]);
+                if (calculatedPrices[k] != 0)
                 {
-                    calculatedPrices[k] = CalculatePrice(prod, k, distributedValues[k]);
-                    if (calculatedPrices[k] != 0)
-                    {
-                        k++;
-                    }
-                    else
-                    {
-                        PercentageDistribution();
-                        k = 0;
-                    }
+                    calculatedAmount[k] = distributedValues[k] / calculatedPrices[k];
+                    k++;
                 }
                 else
-                    k++;
+                {
+                    PercentageDistribution();
+                    k = 0;
+                    counter++;
+                }
+                if (counter >= 10000)
+                {
+                    return false;
+                }
             }
+            return true;
         }
 
-        //private void SummCalculating(int [] multiplyCounter)
-        //{
-        //    // Обнуление суммы при повторном проходе
-        //    summ = 0;
-        //    // Сложение стоимостей всех элементов 
-        //    for (int i = 0; i < multiplyCounter.Length; i++)
-        //    {
-        //        if (priceLists[i].Length > multiplyCounter[i])
-        //        {
-        //            summ += Math.Round((priceLists[i][multiplyCounter[i]]), 2);
-        //        }
-        //    }
-        //}
+
+        void CalculateResult()
+        {
+            results = new double[distributedValues.Length];
+            for (int i = 0; i < results.Length; i++)
+            {
+                results[i] = ((double)(distributedValues[i] / calculatedAmount[i]) / 100);
+                cost1 = (double)cost / 100;
+            }
+        }
+        
         private int CalculatePrice(List<Product> products, int i, int value)
         {
+            if (value == 0)
+            {
+                return 0;
+            }
             List<int> arr = new List<int>();
             for (int counter = Convert.ToInt32(products[i].minPrice * 100); counter < Convert.ToInt32(products[i].maxPrice * 100); counter++)
             {
@@ -192,19 +151,7 @@ namespace winApp.Resources
                 return 0;
             }
         }
-        private void CalculatePrice(List<Product> products)
-        {
 
-            // Инициализация при определение количество элементов в подклассе
-            // Расчет стоимости каждого элемента подкласса в пределах ценового диапазона
-            Random rand = new Random();
-            calculatedPrices.Clear();
-            
-                for (int i = 0; i < products.Count; i++)
-                {
-                
-                    calculatedPrices.Add(0);
-                }
 
         
             // Обнуление счетчика повтора при перерасчете цен после неудачной итерации
@@ -231,5 +178,4 @@ namespace winApp.Resources
 
 
         }
-    }
-
+    

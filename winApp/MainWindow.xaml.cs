@@ -60,7 +60,7 @@ namespace winApp
             {
                 if (item.Key == subCategoryList.SelectedItem.ToString())
                 {
-                    Calculate calculate = new Calculate();
+                    Calculate calculate = new Calculate(item.Value);
                     calculate.SubName = item.Key;
                     calculate.StartCalculating(item.Value, Math.Round((Convert.ToDouble(costField.Text)),2));
                 }

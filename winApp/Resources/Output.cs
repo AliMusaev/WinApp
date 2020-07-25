@@ -48,15 +48,15 @@ namespace winApp.Resources
             k++;
             sheet.Cells[k + 1, "DH"] = cost;
         }
-        public void LoadCalculatedData(int[] results, List<Product> products, List<double> calculatedPrices, double cost)
+        public void LoadCalculatedData(int[] calculatedAmount, List<Product> products, double[] calculatedPrices, double cost)
         {
             // first row number 
             int k = 25;
             for (int i = 0; i < products.Count; i++)
             {
-                if (results[i] * calculatedPrices[i] < cost)
+                if (calculatedAmount[i] * calculatedPrices[i] < cost)
                 {
-                    if (results[i] > 0)
+                    if (calculatedAmount[i] > 0)
                     {
 
                         InsertRow(k, sheet);
@@ -67,9 +67,9 @@ namespace winApp.Resources
                             y = arr.Length / 18;
                         sheet.Rows[k].RowHeight = 24 * y;
                         sheet.Cells[k, "AI"] = products[i].type;
-                        sheet.Cells[k, "DH"] = (results[i]) * calculatedPrices[i];
+                        sheet.Cells[k, "DH"] = (calculatedAmount[i]) * calculatedPrices[i];
                         sheet.Cells[k, "BB"] = calculatedPrices[i];
-                        sheet.Cells[k, "AT"] = results[i];
+                        sheet.Cells[k, "AT"] = calculatedAmount[i];
                         k++;
 
                     }
