@@ -27,15 +27,20 @@ namespace winApp.Resources
             calculatedPrices = new int[products.Count];
             calculatedAmount = new int[products.Count];
             distributedValues = new int[products.Count];
+            
         }
-        public void StartCalculating(List<Product> products, double cost1)
+        public void StartCalculating(List<Product> products, double cost1, MessageWindow message, LoadingWindow loading)
         {
+            loading.Show();
             this.cost = (int)(cost1 * 100);
             if (products.Count == 1)
             {
+                
                 Output outPut = new Output();
-                outPut.LoadCalculatedData(products, cost/100);
+                outPut.LoadCalculatedData(products, (double)cost/100);
+                loading.Close();
                 outPut.OutputExit();
+                message.ShowMessage("Завершено успешно!");
             }
             else
             {
@@ -44,16 +49,20 @@ namespace winApp.Resources
                     CalculateResult();
                     Output outPut = new Output();
                     outPut.LoadCalculatedData(calculatedAmount, products, results, cost1);
+                    
                     outPut.OutputExit();
+                    loading.Close();
+                    message.ShowMessage("Завершено успешно!");
+
                 }
                 else
                 {
-                    System.Windows.MessageBox.Show("Совпадений не обнаружено", "Error", MessageBoxButton.OK);
+                    loading.Close();
+                    message.ShowMessage("Совпадений не найдено!");
+    
                 }
-                
-               
             }
-
+            
         }
         
 
@@ -109,7 +118,7 @@ namespace winApp.Resources
                     k = 0;
                     counter++;
                 }
-                if (counter >= 10000)
+             if (counter >= 20000)
                 {
                     return false;
                 }
@@ -151,31 +160,6 @@ namespace winApp.Resources
                 return 0;
             }
         }
-
-
-        
-            // Обнуление счетчика повтора при перерасчете цен после неудачной итерации
-            // Очистка списка расчитанных цен  после неудачной итерации
-            //priceLists.Clear();
-            //// Расчет таблицы цены - высчитывание множителя на кажду цену
-            //for (int i = 0; i < products.Count; i++)
-            //{
-            //    int k = 1;
-            //    List<double> priceMultiList = new List<double>();
-            //    priceMultiList.Add(0);
-            //    // цикл перемножений
-            //    while (calculatedPrices[i] * k < cost)
-            //    {
-            //        // Возможно надо добавить проверку на превышение стоимости
-            //        priceMultiList.Add((Math.Round(calculatedPrices[i] * k,2)));
-            //        k += 1;
-            //    }
-            //    // Запись готового списка цен продукта в общий список
-            //    priceLists.Add(priceMultiList.ToArray());
-                
-                // создание ячеек счетчика согласно количеству продуктов в подкатегории
-            }
-
-
-        }
+    }
+}
     

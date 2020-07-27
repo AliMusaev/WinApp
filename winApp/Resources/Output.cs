@@ -84,7 +84,6 @@ namespace winApp.Resources
             Book.SaveCopyAs(Directory.GetCurrentDirectory() + "\\Output.xlsx");
             Book.Close(false);
             excelApp.Quit();
-            System.Windows.MessageBox.Show("Complete", "Done", MessageBoxButton.OK);
         }
         void EnterFelds()
         {

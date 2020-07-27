@@ -120,3 +120,7 @@ C:\Projects\WinApp\WinApp\winApp\obj\Debug\winApp.csproj.GenerateResource.cache
 C:\Projects\WinApp\WinApp\winApp\obj\Debug\winApp.csproj.CoreCompileInputs.cache
 C:\Projects\WinApp\WinApp\winApp\obj\Debug\winApp.exe
 C:\Projects\WinApp\WinApp\winApp\obj\Debug\winApp.pdb
+D:\Projects\WinApp\winApp\obj\Debug\LoadingWindow.g.cs
+D:\Projects\WinApp\winApp\obj\Debug\LoadingWindow.baml
+D:\Projects\WinApp\winApp\obj\Debug\MessageWindow.g.cs
+D:\Projects\WinApp\winApp\obj\Debug\MessageWindow.baml

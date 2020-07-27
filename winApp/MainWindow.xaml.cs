@@ -25,15 +25,11 @@ namespace winApp
     {
         Categories excelLoadFile;
         SubCategories subCategories;
-        
-        
-        
         public MainWindow()
         {
             InitializeComponent();
             subCategories = new SubCategories();
             excelLoadFile = new Categories();
-            
             currencyName.ItemsSource = DocumentInfo.CurrencyNameAndCode.Keys;
         }
 
@@ -54,17 +50,38 @@ namespace winApp
         }
         private void calculateButton_Click(object sender, RoutedEventArgs e)
         {
-            // Считывание данных с полей
-            GetDocInfo();
-            foreach (var item in subCategories.Data)
+            LoadingWindow loadingWindow = new LoadingWindow();
+            MessageWindow messageWindow = new MessageWindow();
+            messageWindow.Owner = this;
+            loadingWindow.Owner = this;
+            try
             {
-                if (item.Key == subCategoryList.SelectedItem.ToString())
+                GetDocInfo();
+                foreach (var item in subCategories.Data)
                 {
-                    Calculate calculate = new Calculate(item.Value);
-                    calculate.SubName = item.Key;
-                    calculate.StartCalculating(item.Value, Math.Round((Convert.ToDouble(costField.Text)),2));
+                    if (item.Key == subCategoryList.SelectedItem.ToString())
+                    {
+                        
+                        Calculate calculate = new Calculate(item.Value);
+                        calculate.SubName = item.Key;
+                        try
+                        {
+                            calculate.StartCalculating(item.Value, Math.Round((Convert.ToDouble(costField.Text)), 2), messageWindow, loadingWindow);
+
+                        }
+                        catch (Exception)
+                        {
+                            messageWindow.ShowMessage("Не введена сумма");
+                        }
+                    }
                 }
+
             }
+            catch (Exception)
+            {
+                messageWindow.ShowMessage("Не выбран радел");
+            }
+           
         }
 
         // Load general categories from excel file 
@@ -112,6 +129,19 @@ namespace winApp
         {
             excelLoadFile.Close();
 
+        }
+
+        private void costField_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsDigit(e.Text, 0) && (e.Text != ","))
+            {
+                e.Handled = true; 
+            }
+        }
+
+        private void costField_GotFocus(object sender, RoutedEventArgs e)
+        {
+            costField.Text = "";
         }
     }
 }

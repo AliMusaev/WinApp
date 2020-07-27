@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:winApp"
         mc:Ignorable="d"
-        Title="winApp v0.04" Loaded="Window_Loaded" Closed="Window_Closed" Closing="Window_Closing">
+        Title="winApp v0.04" Loaded="Window_Loaded" Closed="Window_Closed" Closing="Window_Closing" Width="800" Height="400" WindowStartupLocation="CenterScreen">
     <Grid>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="179*"/>
+            
             <ColumnDefinition Width="581*"/>
         </Grid.ColumnDefinitions>
         <TextBox x:Name="dataFiled" HorizontalAlignment="Left" Height="23" 
@@ -19,12 +21,11 @@
              VerticalAlignment="Top" Width="120" Visibility="Collapsed" Grid.ColumnSpan="2"/>
         <TextBox x:Name="costField" HorizontalAlignment="Left" Height="23"
              Margin="10,244,0,0" TextWrapping="Wrap" Text="Сумма"
-             VerticalAlignment="Top" Width="130"/>
+             VerticalAlignment="Top" Width="130" PreviewTextInput="costField_PreviewTextInput" GotFocus="costField_GotFocus"/>
         <ListBox x:Name="categoryList" HorizontalAlignment="Left" Height="106" 
              Margin="10,10,0,0" VerticalAlignment="Top" Width="130" SelectionChanged="categoryList_SelectionChanged"/>
         <ListBox x:Name="subCategoryList" HorizontalAlignment="Left" Height="118"
              Margin="10,121,0,0" VerticalAlignment="Top" Width="130" SelectionChanged="subCategoryList_SelectionChanged"/>
-
         <Button x:Name="calculateButton" Content="Расчитать" HorizontalAlignment="Left" 
       Margin="10,272,0,0" VerticalAlignment="Top" Width="130" Click="calculateButton_Click" Height="30"/>
         <Grid Margin="150,5,5,0" VerticalAlignment="Top" Grid.ColumnSpan="2">
@@ -133,6 +134,9 @@
 
         </Grid>
 
+        
+
 
     </Grid>
+    
 </Window>

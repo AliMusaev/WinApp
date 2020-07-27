@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-Z:\WinApp\winApp\obj\Debug\
+D:\Projects\WinApp\winApp\obj\Debug\
 winApp
 none
 false
 DEBUG;TRACE
-Z:\WinApp\winApp\App.xaml
-11151548125
+D:\Projects\WinApp\winApp\App.xaml
+3-380326522
 
-13-292691820
+15-474200205
 161951547161
-MainWindow.xaml;
+LoadingWindow.xaml;MainWindow.xaml;MessageWindow.xaml;
 
 True
 
