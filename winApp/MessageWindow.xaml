@@ -8,8 +8,8 @@
         Title="MessageWindow" Height="100" Width="200" ResizeMode="NoResize"  ShowInTaskbar="False" WindowStyle="None" WindowStartupLocation="CenterOwner" >
     <Grid Background="#FFD4D4D4">
         <TextBox x:Name="da" Height="50" FontSize="15" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Background="Transparent" IsReadOnly="True"></TextBox>
-        <Button Name="button" Content="OK" VerticalAlignment="Bottom" Width="200" FontSize="15" Height="50" BorderThickness="0" HorizontalContentAlignment="Center" Click="Button_Click" 
-                Background= "Transparent">
+        <Button Name="button" Content="OK" VerticalAlignment="Bottom" Width="190" FontSize="15" Height="45" BorderThickness="1" Margin="5" HorizontalContentAlignment="Center" Click="Button_Click" 
+                Background= "#FFD1D1D1">
             
         </Button>
         
