@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Diagnostics;
+ 
 
 namespace winApp
 {
@@ -13,5 +15,9 @@ namespace winApp
     /// </summary>
     public partial class App : Application
     {
+        private void Application_SessionEnding(object sender, SessionEndingCancelEventArgs e)
+        {
+
+        }
     }
 }

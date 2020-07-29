@@ -23,13 +23,12 @@ namespace winApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        Categories excelLoadFile;
-        SubCategories subCategories;
+        FileHandler file = new FileHandler();
         public MainWindow()
         {
+
             InitializeComponent();
-            subCategories = new SubCategories();
-            excelLoadFile = new Categories();
+            file.LoadFile("File.xlsx");
             currencyName.ItemsSource = DocumentInfo.CurrencyNameAndCode.Keys;
         }
 
@@ -37,7 +36,7 @@ namespace winApp
         private void categoryList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             List<string> names = new List<string>();
-            foreach (var item in subCategories.LoadSubCategories(excelLoadFile.Book, categoryList.SelectedItem.ToString()))
+            foreach (var item in file.Categories[categoryList.SelectedItem.ToString()])
             {
                 names.Add(item.Key);
             }
@@ -57,7 +56,7 @@ namespace winApp
             try
             {
                 GetDocInfo();
-                foreach (var item in subCategories.Data)
+                foreach (var item in file.Categories[categoryList.SelectedItem.ToString()])
                 {
                     if (item.Key == subCategoryList.SelectedItem.ToString())
                     {
@@ -88,12 +87,7 @@ namespace winApp
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
-            categoryList.ItemsSource = excelLoadFile.LoadCategories();
-        }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            //excelLoadFile.Close();
+            categoryList.ItemsSource = file.Categories.Keys;
         }
 
         private void GetDocInfo()
@@ -122,13 +116,6 @@ namespace winApp
         private void currencyName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             currencyCode.Text = (DocumentInfo.CurrencyNameAndCode[currencyName.SelectedItem.ToString()]).ToString();
-        }
-
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            excelLoadFile.Close();
-
         }
 
         private void costField_PreviewTextInput(object sender, TextCompositionEventArgs e)

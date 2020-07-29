@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:winApp"
         mc:Ignorable="d"
-        Title="winApp v0.04" Loaded="Window_Loaded" Closed="Window_Closed" Closing="Window_Closing" Width="600" Height="400" WindowStartupLocation="CenterScreen">
+        Title="winApp v0.04" Loaded="Window_Loaded" Width="600" Height="400" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="192.304"/>
+            <ColumnDefinition Width="7.696"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" >
+        <Grid Grid.Column="0" Grid.ColumnSpan="2" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="140"/>
                 <RowDefinition Height="140"/>
@@ -29,7 +30,7 @@
                     Grid.Row="3" VerticalAlignment="Center" Width="190" Click="calculateButton_Click" Height="40" FontSize="15"/>
         </Grid>
 
-        <Grid Grid.Column="1" Grid.ColumnSpan="2">
+        <Grid Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"></RowDefinition>
                 <RowDefinition Height="25"></RowDefinition>
@@ -170,7 +171,7 @@
                 <TextBox x:Name="govermentId" TextWrapping="Wrap" Margin="2" TextAlignment="Left" VerticalContentAlignment="Center"  Grid.Row="12" Grid.Column="1"/>
             </Grid>
             <Label Content="договора (соглашения) (при наличии)" Grid.Row="13" Grid.Column="0" VerticalContentAlignment="Top" HorizontalAlignment="Left"/>
-           
+
 
         </Grid>
 

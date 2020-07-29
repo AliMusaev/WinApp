@@ -79,11 +79,8 @@ Z:\WinApp\winApp\bin\Debug\winApp.exe
 Z:\WinApp\winApp\bin\Debug\winApp.pdb
 Z:\WinApp\winApp\obj\Debug\winApp.csprojAssemblyReference.cache
 Z:\WinApp\winApp\obj\Debug\winApp.csproj.ResolveComReference.cache
-Z:\WinApp\winApp\obj\Debug\MainWindow.g.cs
-Z:\WinApp\winApp\obj\Debug\App.g.cs
 Z:\WinApp\winApp\obj\Debug\winApp_MarkupCompile.cache
 Z:\WinApp\winApp\obj\Debug\winApp_MarkupCompile.lref
-Z:\WinApp\winApp\obj\Debug\MainWindow.baml
 Z:\WinApp\winApp\obj\Debug\winApp.g.resources
 Z:\WinApp\winApp\obj\Debug\winApp.Properties.Resources.resources
 Z:\WinApp\winApp\obj\Debug\winApp.csproj.GenerateResource.cache
@@ -124,3 +121,10 @@ D:\Projects\WinApp\winApp\obj\Debug\LoadingWindow.g.cs
 D:\Projects\WinApp\winApp\obj\Debug\LoadingWindow.baml
 D:\Projects\WinApp\winApp\obj\Debug\MessageWindow.g.cs
 D:\Projects\WinApp\winApp\obj\Debug\MessageWindow.baml
+Z:\WinApp\winApp\obj\Debug\Resources\Windows\LoadingWindow.g.cs
+Z:\WinApp\winApp\obj\Debug\Resources\Windows\MainWindow.g.cs
+Z:\WinApp\winApp\obj\Debug\Resources\Windows\MessageWindow.g.cs
+Z:\WinApp\winApp\obj\Debug\Resources\App\App.g.cs
+Z:\WinApp\winApp\obj\Debug\Resources\Windows\LoadingWindow.baml
+Z:\WinApp\winApp\obj\Debug\Resources\Windows\MainWindow.baml
+Z:\WinApp\winApp\obj\Debug\Resources\Windows\MessageWindow.baml
