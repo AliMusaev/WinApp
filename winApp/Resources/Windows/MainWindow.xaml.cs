@@ -65,7 +65,7 @@ namespace winApp
                         calculate.SubName = item.Key;
                         try
                         {
-                            calculate.StartCalculating(item.Value, Math.Round((Convert.ToDouble(costField.Text)), 2), messageWindow, loadingWindow);
+                            calculate.StartCalculating(item.Value, Math.Round((Convert.ToDouble(costField.Text)), 2));
 
                         }
                         catch (Exception)

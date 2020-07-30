@@ -18,24 +18,23 @@ namespace winApp.Resources
         int[] calculatedAmount;
         double [] results;
         int cost;
-        double cost1;
-        int[] distributedValues;
+        
         List<Product> products;
         public Calculate(List<Product> input)
         {
             products = input;
             calculatedPrices = new int[products.Count];
             calculatedAmount = new int[products.Count];
-            distributedValues = new int[products.Count];
             
         }
-        public void StartCalculating(List<Product> products, double cost1, MessageWindow message, LoadingWindow loading)
+        public void StartCalculating(List<Product> products, double inputCost)
         {
+            LoadingWindow loading = new LoadingWindow();
+            MessageWindow message = new MessageWindow();
             loading.Show();
-            this.cost = (int)(cost1 * 100);
+            this.cost = (int)(inputCost * 100);
             if (products.Count == 1)
             {
-                
                 Output outPut = new Output();
                 outPut.LoadCalculatedData(products, (double)cost/100);
                 loading.Close();
@@ -46,9 +45,8 @@ namespace winApp.Resources
             {
                 if (FindDivisors())
                 {
-                    CalculateResult();
                     Output outPut = new Output();
-                    outPut.LoadCalculatedData(calculatedAmount, products, results, cost1);
+                    outPut.LoadCalculatedData(calculatedAmount, products, results, inputCost);
                     
                     outPut.OutputExit();
                     loading.Close();
@@ -64,43 +62,46 @@ namespace winApp.Resources
             }
             
         }
-        
-
-
-        
 
 
 
 
-        void PercentageDistribution()
+
+
+
+
+        private int[] PercentageDistribution()
         {
-                int percent = 10000;
-                int tempCost = cost;
-                for (int i = 0; i < calculatedPrices.Length; i++)
+            int[] distributedValues = new int[products.Count];
+            int percent = 10000;
+            int tempCost = cost;
+            for (int i = 0; i < calculatedPrices.Length; i++)
+            {
+                if (percent > 0 && tempCost > 0)
                 {
-                    if (percent > 0 && tempCost > 0)
+                    if (i + 1 == calculatedPrices.Length)
                     {
-                        if (i + 1 == calculatedPrices.Length)
-                        {
-                            distributedValues[i] = tempCost;
-                            break;
-                        }
-                        else
-                        {
-                            int temp = new Random().Next(0, percent);
-                            distributedValues[i] = (cost / 10000) * temp;
-                            percent -= temp;
-                            tempCost -= distributedValues[i];
-                        }
+                        distributedValues[i] = tempCost;
+                        break;
                     }
                     else
                     {
-                        break;
+                        int temp = new Random().Next(0, percent);
+                        distributedValues[i] = (cost / 10000) * temp;
+                        percent -= temp;
+                        tempCost -= distributedValues[i];
                     }
                 }
+                else
+                {
+                    break;
+                }
+            }
+            return distributedValues;
         }        
         bool FindDivisors()
         {
+            int[] distributedValues = new int[products.Count];
             int counter = 0;
             int k = 0;
             
@@ -114,7 +115,7 @@ namespace winApp.Resources
                 }
                 else
                 {
-                    PercentageDistribution();
+                    distributedValues = PercentageDistribution();
                     k = 0;
                     counter++;
                 }
@@ -123,19 +124,14 @@ namespace winApp.Resources
                     return false;
                 }
             }
-            return true;
-        }
-
-
-        void CalculateResult()
-        {
             results = new double[distributedValues.Length];
             for (int i = 0; i < results.Length; i++)
             {
                 results[i] = ((double)(distributedValues[i] / calculatedAmount[i]) / 100);
-                cost1 = (double)cost / 100;
             }
+            return true;
         }
+
         
         private int CalculatePrice(List<Product> products, int i, int value)
         {

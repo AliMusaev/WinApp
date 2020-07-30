@@ -91,11 +91,8 @@ D:\Projects\WinApp\winApp\bin\Debug\winApp.exe
 D:\Projects\WinApp\winApp\bin\Debug\winApp.pdb
 D:\Projects\WinApp\winApp\obj\Debug\winApp.csprojAssemblyReference.cache
 D:\Projects\WinApp\winApp\obj\Debug\winApp.csproj.ResolveComReference.cache
-D:\Projects\WinApp\winApp\obj\Debug\MainWindow.g.cs
-D:\Projects\WinApp\winApp\obj\Debug\App.g.cs
 D:\Projects\WinApp\winApp\obj\Debug\winApp_MarkupCompile.cache
 D:\Projects\WinApp\winApp\obj\Debug\winApp_MarkupCompile.lref
-D:\Projects\WinApp\winApp\obj\Debug\MainWindow.baml
 D:\Projects\WinApp\winApp\obj\Debug\winApp.g.resources
 D:\Projects\WinApp\winApp\obj\Debug\winApp.Properties.Resources.resources
 D:\Projects\WinApp\winApp\obj\Debug\winApp.csproj.GenerateResource.cache
@@ -117,10 +114,6 @@ C:\Projects\WinApp\WinApp\winApp\obj\Debug\winApp.csproj.GenerateResource.cache
 C:\Projects\WinApp\WinApp\winApp\obj\Debug\winApp.csproj.CoreCompileInputs.cache
 C:\Projects\WinApp\WinApp\winApp\obj\Debug\winApp.exe
 C:\Projects\WinApp\WinApp\winApp\obj\Debug\winApp.pdb
-D:\Projects\WinApp\winApp\obj\Debug\LoadingWindow.g.cs
-D:\Projects\WinApp\winApp\obj\Debug\LoadingWindow.baml
-D:\Projects\WinApp\winApp\obj\Debug\MessageWindow.g.cs
-D:\Projects\WinApp\winApp\obj\Debug\MessageWindow.baml
 Z:\WinApp\winApp\obj\Debug\Resources\Windows\LoadingWindow.g.cs
 Z:\WinApp\winApp\obj\Debug\Resources\Windows\MainWindow.g.cs
 Z:\WinApp\winApp\obj\Debug\Resources\Windows\MessageWindow.g.cs
@@ -128,3 +121,10 @@ Z:\WinApp\winApp\obj\Debug\Resources\App\App.g.cs
 Z:\WinApp\winApp\obj\Debug\Resources\Windows\LoadingWindow.baml
 Z:\WinApp\winApp\obj\Debug\Resources\Windows\MainWindow.baml
 Z:\WinApp\winApp\obj\Debug\Resources\Windows\MessageWindow.baml
+D:\Projects\WinApp\winApp\obj\Debug\Resources\Windows\LoadingWindow.g.cs
+D:\Projects\WinApp\winApp\obj\Debug\Resources\Windows\MainWindow.g.cs
+D:\Projects\WinApp\winApp\obj\Debug\Resources\Windows\MessageWindow.g.cs
+D:\Projects\WinApp\winApp\obj\Debug\Resources\App\App.g.cs
+D:\Projects\WinApp\winApp\obj\Debug\Resources\Windows\LoadingWindow.baml
+D:\Projects\WinApp\winApp\obj\Debug\Resources\Windows\MainWindow.baml
+D:\Projects\WinApp\winApp\obj\Debug\Resources\Windows\MessageWindow.baml

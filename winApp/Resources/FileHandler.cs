@@ -45,23 +45,40 @@ namespace winApp.Resources
                 return false;
             }
         }
+        // Method used for closing excel COM objects
+        private void ReleaseFile(object obj)
+        {
+            try
+            {
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(obj);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        // Method used for closing excel application
         private void CloseFile(string filename)
         {
-            //Book.SaveCopyAs(Directory.GetCurrentDirectory() + "\\" + filename);
-            Marshal.ReleaseComObject(lastCell);
-            foreach (var item in sheets)
+            // If book was load
+            if (book != null)
             {
-                Marshal.ReleaseComObject(item);
+                ReleaseFile(lastCell);
+                foreach (var item in sheets)
+                {
+                    ReleaseFile(item);
+                }
+                ReleaseFile(sheets);
+                book.Close();
+                ReleaseFile(book);
             }
-            
-            Marshal.ReleaseComObject(sheets);
-            book.Close();
-            Marshal.ReleaseComObject(book);
+            // Closing application
             books.Close();
-            Marshal.ReleaseComObject(books);
+            ReleaseFile(books);
             excelApp.Application.Quit();
             excelApp.Quit();
-            Marshal.ReleaseComObject(excelApp);
+            ReleaseFile(excelApp);
             lastCell = null;
             sheet = null;
             sheets = null;
@@ -74,6 +91,11 @@ namespace winApp.Resources
             GC.WaitForPendingFinalizers();
 
         }
+        // Metod used for loading data from excel file
+        public void SaveFile(string filename)
+        {
+
+        }
         public void LoadFile(string filename)
         {
             if (OpenFile(filename))
@@ -84,6 +106,7 @@ namespace winApp.Resources
             else
             {
                 CloseFile(filename);
+                new MessageWindow().ShowMessage("Data file is not exist!");
                 Environment.Exit(10);
             }
         }

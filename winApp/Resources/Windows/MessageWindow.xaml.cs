@@ -32,7 +32,7 @@ namespace winApp
         public void ShowMessage(string text)
         {
             da.Text = text;
-            this.Show();
+            this.ShowDialog();
         }
     }
 }
