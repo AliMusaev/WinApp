@@ -11,27 +11,10 @@ namespace winApp.Resources
 {
     class Output
     {
-        List <string> sheets;
-        Microsoft.Office.Interop.Excel.Application excelApp;
-        Excel.Workbook Book;
         Excel.Worksheet sheet;
-        public Output()
+        public Output(Excel.Worksheet sheet)
         {
-            sheets = new List<string>();
-            string path = Directory.GetCurrentDirectory() + "\\Form.xlsx";
-            excelApp = new Microsoft.Office.Interop.Excel.Application();
-            Book = excelApp.Workbooks.Open(path, Type.Missing, Type.Missing, Type.Missing,
-                                           Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-                                           Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-                                           Type.Missing, Type.Missing, Type.Missing);
-            for (int j = 1; j <= Book.Sheets.Count; j++)
-            {
-                sheets.Add(Book.Sheets[j].Name);
-            }
-
-            sheet = (Excel.Worksheet)Book.Sheets[1];
-            var lastCell = sheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);
-            EnterFelds();
+            this.sheet = sheet;
         }
         public void LoadCalculatedData(List<Product> products, double cost)
         {
@@ -48,42 +31,32 @@ namespace winApp.Resources
             k++;
             sheet.Cells[k + 1, "DH"] = cost;
         }
-        public void LoadCalculatedData(int[] calculatedAmount, List<Product> products, double[] calculatedPrices, double cost)
+        public void LoadCalculatedData(Dictionary<int, double> result, List<Product> products, double cost)
         {
             // first row number 
             int k = 25;
-            for (int i = 0; i < products.Count; i++)
+            foreach (var item in result)
             {
-                if (calculatedAmount[i] * calculatedPrices[i] < cost)
+                if(item.Key * item.Value < cost)
                 {
-                    if (calculatedAmount[i] > 0)
+                    if(item.Key > 0)
                     {
-
                         InsertRow(k, sheet);
-                        sheet.Cells[k, "A"] = products[i].name;
-                        char[] arr = products[i].name.ToCharArray();
+                        sheet.Cells[k, "A"] = products[k - 25].name;
+                        char[] arr = products[k - 25].name.ToCharArray();
                         int y = 1;
                         if (arr.Length > 18)
                             y = arr.Length / 18;
                         sheet.Rows[k].RowHeight = 24 * y;
-                        sheet.Cells[k, "AI"] = products[i].type;
-                        sheet.Cells[k, "DH"] = (calculatedAmount[i]) * calculatedPrices[i];
-                        sheet.Cells[k, "BB"] = calculatedPrices[i];
-                        sheet.Cells[k, "AT"] = calculatedAmount[i];
+                        sheet.Cells[k, "AI"] = products[k - 25].type;
+                        sheet.Cells[k, "DH"] = item.Key * item.Value;
+                        sheet.Cells[k, "BB"] = item.Value;
+                        sheet.Cells[k, "AT"] = item.Key;
                         k++;
-
                     }
-                    sheet.Cells[k + 1, "DH"] = cost;
                 }
             }
-
-            
-        }
-        public void OutputExit()
-        {
-            Book.SaveCopyAs(Directory.GetCurrentDirectory() + "\\Output.xlsx");
-            Book.Close(false);
-            excelApp.Quit();
+            sheet.Cells[k + 1, "DH"] = cost;
         }
         void EnterFelds()
         {

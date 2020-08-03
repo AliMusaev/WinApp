@@ -23,5 +23,14 @@ namespace winApp
         {
             InitializeComponent();
         }
+        public void ShowNote(string text)
+        {
+            textField.Text = text;
+            this.Show();
+        }
+        public void CloseNote()
+        {
+            this.Close();
+        }
     }
 }

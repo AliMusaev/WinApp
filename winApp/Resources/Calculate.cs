@@ -12,52 +12,34 @@ namespace winApp.Resources
 {
     class Calculate
     {
-        string subName;
-        public string SubName { get => subName; set => subName = value; }
-        int [] calculatedPrices;
-        int[] calculatedAmount;
-        double [] results;
         int cost;
-        
+        Dictionary<int, double> result = new Dictionary<int, double>();
         List<Product> products;
         public Calculate(List<Product> input)
         {
             products = input;
-            calculatedPrices = new int[products.Count];
-            calculatedAmount = new int[products.Count];
             
         }
-        public void StartCalculating(List<Product> products, double inputCost)
+        public Dictionary<int, double> StartCalculating(List<Product> products, double inputCost, out int postCode)
         {
-            LoadingWindow loading = new LoadingWindow();
-            MessageWindow message = new MessageWindow();
-            loading.Show();
             this.cost = (int)(inputCost * 100);
             if (products.Count == 1)
             {
-                Output outPut = new Output();
-                outPut.LoadCalculatedData(products, (double)cost/100);
-                loading.Close();
-                outPut.OutputExit();
-                message.ShowMessage("Завершено успешно!");
+                result.Add(1, inputCost);
+                postCode = 0;
+                return result;
             }
             else
             {
                 if (FindDivisors())
                 {
-                    Output outPut = new Output();
-                    outPut.LoadCalculatedData(calculatedAmount, products, results, inputCost);
-                    
-                    outPut.OutputExit();
-                    loading.Close();
-                    message.ShowMessage("Завершено успешно!");
-
+                    postCode = 0;
+                    return result;
                 }
                 else
                 {
-                    loading.Close();
-                    message.ShowMessage("Совпадений не найдено!");
-    
+                    postCode = 1;
+                    return null;
                 }
             }
             
@@ -75,11 +57,11 @@ namespace winApp.Resources
             int[] distributedValues = new int[products.Count];
             int percent = 10000;
             int tempCost = cost;
-            for (int i = 0; i < calculatedPrices.Length; i++)
+            for (int i = 0; i < distributedValues.Length; i++)
             {
                 if (percent > 0 && tempCost > 0)
                 {
-                    if (i + 1 == calculatedPrices.Length)
+                    if (i + 1 == distributedValues.Length)
                     {
                         distributedValues[i] = tempCost;
                         break;
@@ -101,6 +83,8 @@ namespace winApp.Resources
         }        
         bool FindDivisors()
         {
+            int[] calculatedAmount = new int[products.Count];
+            int[] calculatedPrices = new int[products.Count];
             int[] distributedValues = new int[products.Count];
             int counter = 0;
             int k = 0;
@@ -124,10 +108,9 @@ namespace winApp.Resources
                     return false;
                 }
             }
-            results = new double[distributedValues.Length];
-            for (int i = 0; i < results.Length; i++)
+            for (int i = 0; i < products.Count; i++)
             {
-                results[i] = ((double)(distributedValues[i] / calculatedAmount[i]) / 100);
+                result.Add(calculatedAmount[i], (double)(distributedValues[i] / calculatedAmount[i]) / 100);
             }
             return true;
         }

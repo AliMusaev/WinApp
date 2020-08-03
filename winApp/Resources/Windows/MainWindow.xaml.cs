@@ -49,10 +49,8 @@ namespace winApp
         }
         private void calculateButton_Click(object sender, RoutedEventArgs e)
         {
-            LoadingWindow loadingWindow = new LoadingWindow();
-            MessageWindow messageWindow = new MessageWindow();
-            messageWindow.Owner = this;
-            loadingWindow.Owner = this;
+            NotificationHandler notes = new NotificationHandler(this);
+            
             try
             {
                 GetDocInfo();
@@ -62,15 +60,17 @@ namespace winApp
                     {
                         
                         Calculate calculate = new Calculate(item.Value);
-                        calculate.SubName = item.Key;
                         try
                         {
-                            calculate.StartCalculating(item.Value, Math.Round((Convert.ToDouble(costField.Text)), 2));
+                            notes.Note(0);
+                            calculate.StartCalculating(item.Value, Math.Round((Convert.ToDouble(costField.Text)), 2),  out int i );
+                            file.SaveFile("Form.xlsx");
+                            notes.Message(i);
 
                         }
                         catch (Exception)
                         {
-                            messageWindow.ShowMessage("Не введена сумма");
+                            notes.Message(2);
                         }
                     }
                 }
@@ -78,7 +78,7 @@ namespace winApp
             }
             catch (Exception)
             {
-                messageWindow.ShowMessage("Не выбран радел");
+                notes.Message(3);
             }
            
         }

@@ -59,7 +59,7 @@ namespace winApp.Resources
             }
         }
         // Method used for closing excel application
-        private void CloseFile(string filename)
+        private void CloseFile()
         {
             // If book was load
             if (book != null)
@@ -94,18 +94,24 @@ namespace winApp.Resources
         // Metod used for loading data from excel file
         public void SaveFile(string filename)
         {
+            OpenFile(filename);
+            sheet = (Excel.Worksheet)book.Sheets[1];
+            Output output = new Output(sheet);
 
+            object file = excelApp.GetSaveAsFilename("OutputName", "Книга Excel (*.xlsx), *xlsx", Type.Missing, Type.Missing);
+            book.SaveAs(file);
+            CloseFile();
         }
         public void LoadFile(string filename)
         {
             if (OpenFile(filename))
             {
                 LoadCategories();
-                CloseFile(filename);
+                CloseFile();
             }
             else
             {
-                CloseFile(filename);
+                CloseFile();
                 new MessageWindow().ShowMessage("Data file is not exist!");
                 Environment.Exit(10);
             }

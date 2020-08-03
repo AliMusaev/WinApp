@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="LoadingWindow" Height="100" Width="200" ResizeMode="NoResize"  ShowInTaskbar="False" WindowStyle="None" WindowStartupLocation="CenterOwner" VerticalAlignment="Center" HorizontalAlignment="Center">
     <Grid>
-        <Label Content="Пожалуйста, подождите..." HorizontalAlignment="Center" FontSize="15" VerticalAlignment="Center" 
+        <TextBox Name="textField" Text="" HorizontalAlignment="Center" FontSize="15" VerticalAlignment="Center" IsReadOnly="True" Focusable="False"
                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="100" Width="200" Background="#FF919191"/>
 
     </Grid>
