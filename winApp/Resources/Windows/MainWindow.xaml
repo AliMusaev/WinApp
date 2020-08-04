@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:winApp"
         mc:Ignorable="d"
-        Title="winApp v0.04" Loaded="Window_Loaded" Width="600" Height="400" WindowStartupLocation="CenterScreen">
+        Title="winApp v1.0" Loaded="Window_Loaded" Width="600" Height="400" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="192.304"/>

@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -55,21 +58,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Resources\FileHandler.cs" />
-    <Compile Include="Resources\NotificationHandler.cs" />
+    <Compile Include="Resources\Scripts\FileHandler.cs" />
+    <Compile Include="Resources\Scripts\NotificationHandler.cs" />
+    <Compile Include="Resources\Scripts\Result.cs" />
     <Compile Include="Resources\Windows\LoadingWindow.xaml.cs">
       <DependentUpon>LoadingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\Windows\MessageWindow.xaml.cs">
       <DependentUpon>MessageWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Calculate.cs" />
-    <Compile Include="Resources\Categories.cs" />
-    <Compile Include="Resources\DocumentInfo.cs" />
-    <Compile Include="Resources\Output.cs" />
-    <Compile Include="Resources\SubCategories.cs" />
-    <Compile Include="Resources\Product.cs" />
-    <Compile Include="Resources\ViewModel.cs" />
+    <Compile Include="Resources\Scripts\Calculate.cs" />
+    <Compile Include="Resources\Scripts\Categories.cs" />
+    <Compile Include="Resources\Scripts\DocumentInfo.cs" />
+    <Compile Include="Resources\Scripts\Output.cs" />
+    <Compile Include="Resources\Scripts\SubCategories.cs" />
+    <Compile Include="Resources\Scripts\Product.cs" />
     <Page Include="Resources\Windows\LoadingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -145,6 +148,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

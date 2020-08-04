@@ -16,21 +16,6 @@ namespace winApp.Resources
         {
             this.sheet = sheet;
         }
-        public void LoadCalculatedData(List<Product> products, double cost)
-        {
-            int k = 25;
-            InsertRow(k, sheet);
-            sheet.Cells[k, "A"] = products[0].name;
-            char[] arr = products[0].name.ToCharArray();
-            int y = arr.Length / 18;
-            sheet.Rows[25].RowHeight = 24 * y;
-            sheet.Cells[k, "AI"] = products[0].type;
-            sheet.Cells[k, "DH"] = cost;
-            sheet.Cells[k, "BB"] = cost;
-            sheet.Cells[k, "AT"] = 1;
-            k++;
-            sheet.Cells[k + 1, "DH"] = cost;
-        }
         public void LoadCalculatedData(Dictionary<int, double> result, List<Product> products, double cost)
         {
             // first row number 
@@ -112,8 +97,9 @@ namespace winApp.Resources
             cellRange.Merge(Type.Missing);
             cellRange = sheet.get_Range("ET" + rowNum, "FE" + rowNum);
             cellRange.Merge(Type.Missing);
-
-
+            cellRange = null;
+            cellRange1 = null;
+            rowRange = null;
             //cellRange = sheet.get_Range("A" + (rowNum+1), "FF" + (rowNum+1));
             //cellRange.PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteAll, Microsoft.Office.Interop.Excel.XlPasteSpecialOperation.xlPasteSpecialOperationNone, false, false);
 

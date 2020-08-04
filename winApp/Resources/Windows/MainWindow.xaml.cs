@@ -63,10 +63,17 @@ namespace winApp
                         try
                         {
                             notes.Note(0);
-                            calculate.StartCalculating(item.Value, Math.Round((Convert.ToDouble(costField.Text)), 2),  out int i );
-                            file.SaveFile("Form.xlsx");
-                            notes.Message(i);
-
+                            double cost = Math.Round((Convert.ToDouble(costField.Text)), 2);
+                            var result = calculate.StartCalculating(item.Value, cost, out int i);
+                            if (result != null)
+                            {
+                                file.SaveFile(result, item.Value, cost);
+                                notes.Message(i);
+                            }
+                            else
+                            {
+                                notes.Message(1);
+                            }  
                         }
                         catch (Exception)
                         {

@@ -10,22 +10,23 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace winApp.Resources
 {
+
     class Calculate
     {
         int cost;
-        Dictionary<int, double> result = new Dictionary<int, double>();
+        List<Result> result= new List<Result>();
         List<Product> products;
         public Calculate(List<Product> input)
         {
             products = input;
             
         }
-        public Dictionary<int, double> StartCalculating(List<Product> products, double inputCost, out int postCode)
+        public List<Result> StartCalculating(List<Product> products, double inputCost, out int postCode)
         {
             this.cost = (int)(inputCost * 100);
             if (products.Count == 1)
             {
-                result.Add(1, inputCost);
+                result.Add(new Result(1, inputCost));
                 postCode = 0;
                 return result;
             }
@@ -41,6 +42,7 @@ namespace winApp.Resources
                     postCode = 1;
                     return null;
                 }
+
             }
             
         }
@@ -103,16 +105,18 @@ namespace winApp.Resources
                     k = 0;
                     counter++;
                 }
-             if (counter >= 20000)
+             if (counter >= 10000)
                 {
                     return false;
                 }
-            }
+            } 
+
             for (int i = 0; i < products.Count; i++)
             {
-                result.Add(calculatedAmount[i], (double)(distributedValues[i] / calculatedAmount[i]) / 100);
+                result.Add(new Result (calculatedAmount[i], (double)(distributedValues[i] / calculatedAmount[i]) / 100));
             }
             return true;
+            
         }
 
         

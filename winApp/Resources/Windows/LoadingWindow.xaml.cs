@@ -30,7 +30,7 @@ namespace winApp
         }
         public void CloseNote()
         {
-            this.Close();
+            this.Hide();
         }
     }
 }
